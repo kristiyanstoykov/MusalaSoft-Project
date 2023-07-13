@@ -26,6 +26,8 @@ public class UserService {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalStateException("no such user"));
 
+        //TO-DO: Add custom exceptions
+
         return modelMapper.map(user, UserDtoResponse.class);
     }
 
