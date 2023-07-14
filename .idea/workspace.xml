@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="89e461e6-50c2-4380-a9e8-a81514580472" name="Changes" comment="" />
+    <list default="true" id="89e461e6-50c2-4380-a9e8-a81514580472" name="Changes" comment="Basic Frontend" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -69,6 +69,19 @@
       <option name="presentableId" value="Default" />
       <updated>1689330581635</updated>
     </task>
+    <task id="LOCAL-00001" summary="Basic Frontend">
+      <option name="closed" value="true" />
+      <created>1689331521188</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1689331521188</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Basic Frontend" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic Frontend" />
   </component>
 </project>
