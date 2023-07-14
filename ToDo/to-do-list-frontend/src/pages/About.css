@@ -1,0 +1,35 @@
+
+
+.about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60vh;
+  }
+  
+  .about-content {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    color: #333;
+  }
+  
+  .about-content h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  
+  .about-content p {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  
+  .about-content a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .about-content a:hover {
+    text-decoration: underline;
+  }
+  
