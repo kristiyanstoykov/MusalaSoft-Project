@@ -1,0 +1,13 @@
+.contact-section {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: white;
+  }
+  .footer{
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+  }
