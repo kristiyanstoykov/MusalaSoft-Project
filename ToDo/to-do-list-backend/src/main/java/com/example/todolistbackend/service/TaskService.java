@@ -18,13 +18,26 @@ public class TaskService {
         this.modelMapper = new ModelMapper();
     }
 
-    public TaskDtoResponse getTask( Long id ) {
+    public TaskDtoResponse getTask(Long id) {
+        Task task = taskRepository.findById(id)
+            .orElseThrow(() -> new IllegalStateException("Task not found"));
 
-        Task task = taskRepository.findById( id )
-            .orElseThrow( () -> new IllegalStateException("Task not found") );
+        return modelMapper.map(task, TaskDtoResponse.class);
+    }
 
+    public void deleteTask(Long id) {
+        Task taskToDelete = taskRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("Task not found"));
 
-            return modelMapper.map(task, TaskDtoResponse.class);
+        taskRepository.delete(taskToDelete);
+    }
+
+    public TaskDtoResponse updateTask(Long id, TaskDto taskDto) {
+        Task taskToUpdate = taskRepository.findById(id)
+                .orElseThrow(() -> new IllegalStateException("Task not found"));
+
+        modelMapper.map(taskDto, taskToUpdate);
+        return modelMapper.map(taskToUpdate, TaskDtoResponse.class);
     }
 
     public TaskDtoResponse registerTask(TaskDto taskDto) {

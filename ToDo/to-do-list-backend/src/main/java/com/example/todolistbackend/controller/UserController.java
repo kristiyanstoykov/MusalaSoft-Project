@@ -5,6 +5,7 @@ import com.example.todolistbackend.dto.UserDtoResponse;
 import com.example.todolistbackend.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,7 +23,7 @@ public class UserController {
     public UserDtoResponse getUser(@PathVariable("email") String email) {
         return userService.getUser(email);
     }
-
+    
     @PostMapping(path = "/register-user")
     public UserDtoResponse registerUser(@Valid @RequestBody UserDto userDto) {
         return userService.registerUser(userDto);
