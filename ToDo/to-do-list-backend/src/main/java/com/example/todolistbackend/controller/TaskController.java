@@ -2,9 +2,12 @@ package com.example.todolistbackend.controller;
 
 import com.example.todolistbackend.dto.TaskDto;
 import com.example.todolistbackend.dto.TaskDtoResponse;
+import com.example.todolistbackend.dto.UserDto;
+import com.example.todolistbackend.dto.UserDtoResponse;
 import com.example.todolistbackend.service.TaskService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,9 +26,19 @@ public class TaskController {
         return taskService.getTask(id);
     }
 
-    @PostMapping(path = "/register-user")
+    @PostMapping(path = "/add-task")
     public TaskDtoResponse registerTask(@Valid @RequestBody TaskDto taskDto) {
-        return taskService.registerTask(taskDto);
+        return taskService.addTask(taskDto);
+    }
+    @PutMapping(path = "/{id}/update-task")
+    public TaskDtoResponse updateTask(@PathVariable("id") Long id,
+                                      @Valid @RequestBody TaskDto taskDto) {
+        return taskService.updateTask(id, taskDto);
     }
 
+    @DeleteMapping(path = "/{id}/delete-task")
+    public ResponseEntity<Void> deleteTask(@PathVariable("id") Long id) {
+        taskService.deleteTask(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -40,14 +40,11 @@ public class TaskService {
         return modelMapper.map(taskToUpdate, TaskDtoResponse.class);
     }
 
-    public TaskDtoResponse registerTask(TaskDto taskDto) {
+    public TaskDtoResponse addTask(TaskDto taskDto) {
 
         Task taskToRegister = modelMapper.map(taskDto, Task.class);
         taskRepository.save(taskToRegister);
 
         return modelMapper.map(taskToRegister, TaskDtoResponse.class);
-
     }
-
-
 }
