@@ -1,6 +1,7 @@
 package com.example.todolistbackend.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,15 +15,15 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UserDto {
-    @NotEmpty
+    @NotBlank
     private String firstName;
-    @NotEmpty
+    @NotBlank
     private String lastName;
-    @NotEmpty
+    @NotBlank
     private String username;
-    @NotEmpty
+    @NotBlank
     private String email;
-    @NotEmpty
+    @NotBlank
     private String password;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
