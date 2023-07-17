@@ -1,6 +1,7 @@
 package com.example.todolistbackend.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -15,7 +16,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TaskDto {
-    @NotEmpty
+    @NotBlank
     private String description;
 
     @JsonFormat(pattern = "dd-MM-yyyy")
