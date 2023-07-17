@@ -3,7 +3,7 @@ import Navigationbar from '../components/NavigationBar';
 
 function SignUp() {
   return (
-    <>
+    <div>
       <Navigationbar />
 
       <div style={styles.container}>
@@ -11,12 +11,27 @@ function SignUp() {
           <h2 style={styles.heading}>Sign Up</h2>
           <form>
             <div>
-              <label>Username</label>
-              <input type="text" style={styles.input} />
+              <label>First Name:</label>
+              <input type="gmail" style={styles.input} />
             </div>
             <div>
-              <label>Mail</label>
+              <label>Last Name:</label>
+              <input type="gmail" style={styles.input} />
+            </div>
+
+            <div>
+              <label>Username:</label>
               <input type="text" style={styles.input} />
+            </div>
+
+            <div>
+              <label>Date of Birth:</label>
+              <input type="date" style={styles.input} />
+            </div>
+
+            <div>
+              <label>E-Mail:</label>
+              <input type="gmail" style={styles.input} />
             </div>
             <div>
               <label>Password</label>
@@ -26,7 +41,7 @@ function SignUp() {
           </form>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -3,7 +3,7 @@ import Navigationbar from '../components/NavigationBar';
 
 function Login() {
   return (
-    <>
+      <div>
       <Navigationbar />
 
       <div style={styles.container}>
@@ -11,19 +11,21 @@ function Login() {
           <h2 style={styles.heading}>Login</h2>
           <form>
             <div>
-              <label>Username</label>
+              <label>Username:</label>
               <input type="text" style={styles.input} />
             </div>
             <div>
-              <label>Password</label>
+              <label>Password:</label>
               <input type="password" style={styles.input} />
             </div>
-            <button type="submit" style={styles.button}>Login</button>
+            <button type="submit" style={styles.button} >Login</button>
           </form>
         </div>
       </div>
 
-    </>
+
+      </div>
+  
   );
 }
 
@@ -57,7 +59,7 @@ const styles = {
     border: 'none',
     borderRadius: '4px',
     cursor: 'pointer',
-  },
+  }
 };
 
 export default Login;
