@@ -11,7 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/to_do_list_system/tasks")
+@RequestMapping(path = "/tasks")
 public class TaskController {
 
     @Autowired
@@ -21,22 +21,22 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping(path = "/{id}/get-task")
+    @GetMapping(path = "/task/{id}")
     public TaskDtoResponse getTask(@PathVariable("id") Long id) {
         return taskService.getTask(id);
     }
 
-    @PostMapping(path = "/add-task")
+    @PostMapping(path = "/task")
     public TaskDtoResponse registerTask(@Valid @RequestBody TaskDto taskDto) {
         return taskService.addTask(taskDto);
     }
-    @PutMapping(path = "/{id}/update-task")
+    @PutMapping(path = "/task/{id}")
     public TaskDtoResponse updateTask(@PathVariable("id") Long id,
                                       @Valid @RequestBody TaskDto taskDto) {
         return taskService.updateTask(id, taskDto);
     }
 
-    @DeleteMapping(path = "/{id}/delete-task")
+    @DeleteMapping(path = "/task/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable("id") Long id) {
         taskService.deleteTask(id);
         return ResponseEntity.noContent().build();

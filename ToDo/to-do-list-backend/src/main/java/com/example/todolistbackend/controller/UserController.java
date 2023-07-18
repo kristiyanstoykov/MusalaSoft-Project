@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(path = "/to_do_list_system/users")
+@RequestMapping(path = "/users")
 public class UserController {
 
     @Autowired
@@ -18,23 +18,23 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping(path = "/{email}/get-user")
+    @GetMapping(path = "/user/{email}")
     public UserDtoResponse getUser(@PathVariable("email") String email) {
         return userService.getUser(email);
     }
 
-    @PostMapping(path = "/register-user")
+    @PostMapping(path = "/user")
     public UserDtoResponse registerUser(@Valid @RequestBody UserDto userDto) {
         return userService.registerUser(userDto);
     }
 
-    @PutMapping(path = "/{username}/update-user")
+    @PutMapping(path = "/user/{username}")
     public UserDtoResponse updateUser(@PathVariable("username") String username,
                                       @Valid @RequestBody UserDto userDto) {
         return userService.updateUser(username, userDto);
     }
 
-    @DeleteMapping(path = "/{username}/delete-user")
+    @DeleteMapping(path = "/user/{username}")
     public ResponseEntity<Void> deleteUser(@PathVariable("username") String username) {
         userService.deleteUser(username);
         return ResponseEntity.noContent().build();
