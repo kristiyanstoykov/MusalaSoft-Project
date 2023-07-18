@@ -10,48 +10,14 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-@ExceptionHandler(UserWithGivenUsernameExistsException.class)
-    public ResponseEntity<ErrorResponse> handleUserWithGivenUsernameExistsException(UserWithGivenUsernameExistsException e){
-            ErrorResponse errorResponse = new ErrorResponse();
-
-    errorResponse.setStatus(HttpStatus.CONFLICT.value());
-    errorResponse.setMessage(e.getMessage());
-    errorResponse.setTimestamp(LocalDateTime.now());
-
-    return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-    }
-
-    @ExceptionHandler(EmailAlreadyInUseException.class)
-    public ResponseEntity<ErrorResponse> handleUsernameAlreadyInUseException(UsernameAlreadyInUseException e){
+    @ExceptionHandler({UserWithGivenUsernameExistsException.class, UsernameAlreadyInUseException.class,
+            EmailAlreadyInUseException.class, InvalidLoginInformationException.class})
+    public ResponseEntity<ErrorResponse> handleException(Exception e) {
         ErrorResponse errorResponse = new ErrorResponse();
-
         errorResponse.setStatus(HttpStatus.CONFLICT.value());
         errorResponse.setMessage(e.getMessage());
         errorResponse.setTimestamp(LocalDateTime.now());
 
         return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
     }
-
-    @ExceptionHandler(EmailAlreadyInUseException.class)
-    public ResponseEntity<ErrorResponse> handleEmailAlreadyInUseException(EmailAlreadyInUseException e){
-        ErrorResponse errorResponse = new ErrorResponse();
-
-        errorResponse.setStatus(HttpStatus.CONFLICT.value());
-        errorResponse.setMessage(e.getMessage());
-        errorResponse.setTimestamp(LocalDateTime.now());
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-    }
-
-    @ExceptionHandler(InvalidLoginInformationException.class)
-    public ResponseEntity<ErrorResponse> handleInvalidLoginInformationException(InvalidLoginInformationException e){
-        ErrorResponse errorResponse = new ErrorResponse();
-
-        errorResponse.setStatus(HttpStatus.CONFLICT.value());
-        errorResponse.setMessage(e.getMessage());
-        errorResponse.setTimestamp(LocalDateTime.now());
-
-        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
-    }
-
 }
