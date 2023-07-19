@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @AllArgsConstructor
@@ -27,13 +28,13 @@ public class Task {
     private String description;
 
     @Column(name = "date_of_creation")
-    private LocalDate dateOfCreation;
+    private LocalDateTime dateOfCreation;
 
     @Column(name = "date_of_expiration", nullable = false)
-    private LocalDate dateOfExpiration;
+    private LocalDateTime dateOfExpiration;
 
     @Column(name = "date_of_last_update", nullable = false)
-    private LocalDate dateOfLastUpdate;
+    private LocalDateTime dateOfLastUpdate;
 
     @Column(name = "is_finished")
     private Boolean isFinished;

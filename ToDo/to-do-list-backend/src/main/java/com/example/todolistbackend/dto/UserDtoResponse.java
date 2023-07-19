@@ -27,5 +27,5 @@ public class UserDtoResponse {
     private String password;
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
-    private List<TaskDto> tasks;
+    private List<TaskDtoResponse> tasks;
 }

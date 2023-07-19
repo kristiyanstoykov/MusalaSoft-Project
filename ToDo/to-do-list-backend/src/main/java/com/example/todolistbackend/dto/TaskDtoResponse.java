@@ -1,34 +1,41 @@
 package com.example.todolistbackend.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class TaskDtoResponse {
-    @NotEmpty
+    @NotBlank
     private String title;
 
-    @NotEmpty
+    @NotBlank
     private String description;
     
-    @NotEmpty
-    @JsonFormat(pattern = "hh:mm dd-MM-yyyy")
-    private LocalDate timeOfCreation;
+    @NotBlank
+    @JsonFormat(pattern = "HH:mm dd-MM-yyyy")
+    private LocalDateTime timeOfCreation;
 
-    @NotEmpty
-    @JsonFormat(pattern = "hh:mm dd-MM-yyyy")
-    private LocalDate dateOfExpiration;
+    @NotBlank
+    @JsonFormat(pattern = "HH:mm dd-MM-yyyy")
+    private LocalDateTime dateOfExpiration;
 
-    @NotEmpty
-    @JsonFormat(pattern = "hh:mm dd-MM-yyyy")
-    private LocalDate dateOfLastUpdate;
+    @NotBlank
+    @JsonFormat(pattern = "HH:mm dd-MM-yyyy")
+    private LocalDateTime dateOfLastUpdate;
 
-    @NotEmpty
+    @NotBlank
     private Boolean isFinished;
-
-    @NotEmpty
-    private String password;
 }

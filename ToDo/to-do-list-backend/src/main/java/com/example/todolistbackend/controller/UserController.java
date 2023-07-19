@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/users")
 public class UserController {
@@ -18,23 +20,23 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
     }
-    @GetMapping(path = "/user/{email}")
-    public UserDtoResponse getUser(@PathVariable("email") String email) {
-        return userService.getUser(email);
+    @GetMapping(path = "/{username}")
+    public UserDtoResponse getUser(@PathVariable("username") String username) {
+        return userService.getUser(username);
     }
 
-    @PostMapping(path = "/user")
+    @PostMapping(path = "/register")
     public UserDtoResponse registerUser(@Valid @RequestBody UserDto userDto) {
         return userService.registerUser(userDto);
     }
 
-    @PutMapping(path = "/user/{username}")
+    @PutMapping(path = "/{username}")
     public UserDtoResponse updateUser(@PathVariable("username") String username,
                                       @Valid @RequestBody UserDto userDto) {
         return userService.updateUser(username, userDto);
     }
 
-    @DeleteMapping(path = "/user/{username}")
+    @DeleteMapping(path = "/{username}")
     public ResponseEntity<Void> deleteUser(@PathVariable("username") String username) {
         userService.deleteUser(username);
         return ResponseEntity.noContent().build();
