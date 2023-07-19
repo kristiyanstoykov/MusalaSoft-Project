@@ -34,13 +34,6 @@ public class TaskService {
         this.userRepository = userRepository;
     }
 
-    public TaskDtoResponse getTask(Long id) {
-        Task task = taskRepository.findById(id)
-            .orElseThrow(() -> new TaskDoesNotExistException(TASK_DOES_NOT_EXIST));
-
-        return modelMapper.map(task, TaskDtoResponse.class);
-    }
-
     public List<TaskDtoResponse> getAllTasks(String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserDoesNotExistException(USER_DOES_NOT_EXIST));

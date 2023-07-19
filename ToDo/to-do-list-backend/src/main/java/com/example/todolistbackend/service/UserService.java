@@ -36,11 +36,13 @@ public class UserService {
         User userToUpdate = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserDoesNotExistException(USER_DOES_NOT_EXIST));
 
-        if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
+        if (userRepository.findByUsername(userDto.getUsername()).isPresent()
+        && (!userToUpdate.getUsername().equals(userDto.getUsername()))) {
             throw new UserWithGivenUsernameAlreadyExistsException(DESIRED_USERNAME_ALREADY_IN_USE);
         }
 
-        if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
+        if (userRepository.findByEmail(userDto.getEmail()).isPresent()
+        && (!userToUpdate.getEmail().equals(userDto.getEmail()))) {
             throw new UserWithGivenEmailAlreadyExistsException(DESIRED_EMAIL_ALREADY_IN_USE);
         }
 
