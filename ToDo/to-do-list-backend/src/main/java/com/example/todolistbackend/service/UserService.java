@@ -2,15 +2,16 @@ package com.example.todolistbackend.service;
 
 import com.example.todolistbackend.dto.UserDto;
 import com.example.todolistbackend.dto.UserDtoResponse;
+import com.example.todolistbackend.exception.UserWithGivenEmailAlreadyExistsException;
+import com.example.todolistbackend.exception.UserDoesNotExistException;
+import com.example.todolistbackend.exception.UserWithGivenUsernameAlreadyExistsException;
 import com.example.todolistbackend.model.User;
 import com.example.todolistbackend.repository.UserRepository;
-import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
-import org.springframework.ui.Model;
 
-import java.util.Optional;
+import static com.example.todolistbackend.common.ExceptionMessages.*;
 
 @Service
 public class UserService {
@@ -18,30 +19,29 @@ public class UserService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
+    @Autowired
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
         this.modelMapper = new ModelMapper();
     }
 
-    public UserDtoResponse getUser(String email) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalStateException("no such user"));
-
-        //TO-DO: Add custom exceptions
+    public UserDtoResponse getUser(String username) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UserDoesNotExistException(USER_DOES_NOT_EXIST));
 
         return modelMapper.map(user, UserDtoResponse.class);
     }
 
     public UserDtoResponse updateUser(String username, UserDto userDto) {
         User userToUpdate = userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalStateException("no such user"));
+                .orElseThrow(() -> new UserDoesNotExistException(USER_DOES_NOT_EXIST));
 
         if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
-            throw new IllegalStateException("this username is already used by another user");
+            throw new UserWithGivenUsernameAlreadyExistsException(DESIRED_USERNAME_ALREADY_IN_USE);
         }
 
         if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
-            throw new IllegalStateException("this email is already used by another user");
+            throw new UserWithGivenEmailAlreadyExistsException(DESIRED_EMAIL_ALREADY_IN_USE);
         }
 
         modelMapper.map(userDto, userToUpdate);
@@ -50,7 +50,7 @@ public class UserService {
 
     public void deleteUser(String username) {
         User userToDelete = userRepository.findByUsername(username)
-                .orElseThrow(() -> new IllegalStateException("no such user"));
+                .orElseThrow(() -> new UserDoesNotExistException(USER_DOES_NOT_EXIST));
 
         userRepository.delete(userToDelete);
     }
@@ -58,18 +58,16 @@ public class UserService {
     public UserDtoResponse registerUser(UserDto userDto) {
 
         if (userRepository.findByEmail(userDto.getEmail()).isPresent()) {
-            throw new IllegalStateException("email taken");
+            throw new UserWithGivenEmailAlreadyExistsException(DESIRED_EMAIL_ALREADY_IN_USE);
         }
 
         if (userRepository.findByUsername(userDto.getUsername()).isPresent()) {
-            throw new IllegalStateException("username taken");
+            throw new UserWithGivenUsernameAlreadyExistsException(DESIRED_USERNAME_ALREADY_IN_USE);
         }
 
         User userToRegister = modelMapper.map(userDto, User.class);
         userRepository.save(userToRegister);
 
         return modelMapper.map(userToRegister, UserDtoResponse.class);
-
     }
-
 }

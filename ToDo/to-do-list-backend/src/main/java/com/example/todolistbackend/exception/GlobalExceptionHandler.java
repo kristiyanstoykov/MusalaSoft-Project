@@ -10,10 +10,15 @@ import java.time.LocalDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler({UserWithGivenUsernameExistsException.class, UsernameAlreadyInUseException.class,
-            EmailAlreadyInUseException.class, InvalidLoginInformationException.class})
+    @ExceptionHandler({UserWithGivenUsernameAlreadyExistsException.class,
+                       UserWithGivenEmailAlreadyExistsException.class,
+                       InvalidLoginInformationException.class,
+                       UserDoesNotExistException.class,
+                       TaskDoesNotExistException.class
+    })
     public ResponseEntity<ErrorResponse> handleException(Exception e) {
         ErrorResponse errorResponse = new ErrorResponse();
+
         errorResponse.setStatus(HttpStatus.CONFLICT.value());
         errorResponse.setMessage(e.getMessage());
         errorResponse.setTimestamp(LocalDateTime.now());

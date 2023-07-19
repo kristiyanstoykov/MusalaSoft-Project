@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -16,12 +17,16 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TaskDto {
+
+    @NotBlank
+    private String title;
+
     @NotBlank
     private String description;
 
-    @JsonFormat(pattern = "dd-MM-yyyy")
-    private LocalDateTime dateAndTimeOfCreation;
+    @JsonFormat(pattern = "HH:mm dd-MM-yyyy")
+    private LocalDateTime dateOfExpiration;
 
     @NotNull
-    private boolean isFinished;
+    private Boolean isFinished;
 }

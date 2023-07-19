@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/tasks")
 public class TaskController {
@@ -21,22 +23,28 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    @GetMapping(path = "/task/{id}")
+    @GetMapping(path = "/{username}")
+    public List<TaskDtoResponse> getAllTasks(@PathVariable("username") String username) {
+        return taskService.getAllTasks(username);
+    }
+
+    @GetMapping(path = "/{id}")
     public TaskDtoResponse getTask(@PathVariable("id") Long id) {
         return taskService.getTask(id);
     }
 
-    @PostMapping(path = "/task")
-    public TaskDtoResponse registerTask(@Valid @RequestBody TaskDto taskDto) {
-        return taskService.addTask(taskDto);
+    @PostMapping(path = "/add/{username}")
+    public TaskDtoResponse registerTask(@Valid @RequestBody TaskDto taskDto,
+                                        @PathVariable("username") String username) {
+        return taskService.addTask(taskDto, username);
     }
-    @PutMapping(path = "/task/{id}")
+    @PutMapping(path = "/{id}")
     public TaskDtoResponse updateTask(@PathVariable("id") Long id,
                                       @Valid @RequestBody TaskDto taskDto) {
         return taskService.updateTask(id, taskDto);
     }
 
-    @DeleteMapping(path = "/task/{id}")
+    @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable("id") Long id) {
         taskService.deleteTask(id);
         return ResponseEntity.noContent().build();
