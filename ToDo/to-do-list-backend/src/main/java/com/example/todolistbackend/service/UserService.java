@@ -8,13 +8,17 @@ import com.example.todolistbackend.exception.UserWithGivenUsernameAlreadyExistsE
 import com.example.todolistbackend.model.User;
 import com.example.todolistbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.modelmapper.ModelMapper;
+import org.springframework.ui.Model;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 import static com.example.todolistbackend.common.ExceptionMessages.*;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
@@ -30,6 +34,21 @@ public class UserService {
                 .orElseThrow(() -> new UserDoesNotExistException(USER_DOES_NOT_EXIST));
 
         return modelMapper.map(user, UserDtoResponse.class);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        User byUsername = userRepository.findByUsername(username).get();
+
+
+        UserDetails user = org.springframework.security.core.userdetails.User.withUsername(username)
+                .password("{noop}" + byUsername.getPassword())
+                .authorities("read")
+                .roles("USER")
+                .build();
+
+        return user;
     }
 
     public UserDtoResponse updateUser(String username, UserDto userDto) {

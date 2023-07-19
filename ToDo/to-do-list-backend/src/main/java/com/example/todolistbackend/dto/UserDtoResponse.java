@@ -28,4 +28,6 @@ public class UserDtoResponse {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
     private List<TaskDtoResponse> tasks;
+
+
 }
