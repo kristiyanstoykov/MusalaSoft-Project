@@ -14,11 +14,11 @@ const Footer = () => {
         <div className="container text-center text-md-start mt-5 ">
           <div className="row mt-3">
           <div className="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4 d-flex justify-content-center align-items-center">
-            <p><img src="/ToDo_logo-transparent-cropped.png" alt="Logo ToDo" style={{maxWidth: "75px"}}/></p>
+            <a href="/"><img src="/ToDo_logo-transparent-cropped.png" alt="Logo ToDo" style={{maxWidth: "75px"}}/></a>
           </div>
 
 
-            <div className="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4 d-flex flex-column justify-content-center align-items-center">
+            <div className="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4 d-flex flex-column align-items-center">
               <h6 className="text-uppercase fw-bold">Useful links</h6>
               <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{width: '60px', backgroundColor: '#7c4dff', height: '2px'}}/>
               <p>
@@ -32,7 +32,7 @@ const Footer = () => {
               </p>
             </div>
 
-            <div className="col-md-4 col-lg-4 col-xl-4 mx-auto mb-md-0 mb-4">
+            <div className="col-md-4 col-lg-4 col-xl-4 mx-auto mb-md-0 mb-4 d-flex flex-column align-items-center">
               {/* Links */}
               <h6 className="text-uppercase fw-bold">Contact</h6>
               <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{width: '60px', backgroundColor: '#7c4dff', height: '2px'}}/>
