@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AuthData } from "../../auth/AuthWrapper";
-import './Account.css';
+// import './Account.css';
 
 export const Account = () => {
   const { user } = AuthData();
@@ -30,7 +30,7 @@ export const Account = () => {
           throw new Error("Failed to fetch user data");
         }
 
-     
+
 
         const userData = await response.json();
         setUserData(userData);
@@ -44,11 +44,11 @@ export const Account = () => {
 
   return (
     <div className="page">
-      
+
       {userData && (
         <div className="userCard">
           <h1>Your Account</h1>
-           
+
           <h2>First Name: </h2>
           <h3>{userData.firstName}</h3>
 
@@ -61,11 +61,11 @@ export const Account = () => {
           <h2>E-mail: </h2>
           <h3>{userData.email}</h3>
         </div>
-        
+
       )}
-          <footer className='footer'>
-                 Make by TU Team 2
-          </footer>
+      <footer className='footer'>
+        Make by TU Team 2
+      </footer>
       {error && <p>Error: {error}</p>}
     </div>
   );
