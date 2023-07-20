@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faEnvelope, faPhone } from '@fortawesome/free-solid-svg-icons';
-import { AuthWrapper } from '../../auth/AuthWrapperFooter';
 
 
 const Footer = () => {
