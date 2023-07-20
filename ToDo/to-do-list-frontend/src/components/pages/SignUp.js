@@ -33,7 +33,7 @@ export const SignUp = () => {
   
     // Send the POST request
     axios
-      .post('http://localhost:8080/to_do_list_system/users/register-user', updatedUser)
+      .post('http://localhost:8080/users/register', updatedUser)
       .then((response) => {
         console.log('User registered successfully:', response.data);
         navigate("/login");
