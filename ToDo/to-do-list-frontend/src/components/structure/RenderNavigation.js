@@ -57,7 +57,7 @@ export const RenderMenu = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
-        <a className="navbar-brand" href="#">Navbar</a>
+        <a className="navbar-brand" href="/">MusalaSoft-Project</a>
         <button className={`navbar-toggler ${isOpen ? '' : 'collapsed'}`} type="button" onClick={toggle}
                 aria-expanded={isOpen} aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
