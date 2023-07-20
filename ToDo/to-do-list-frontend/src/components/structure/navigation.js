@@ -10,8 +10,8 @@ export const nav = [
      { path:     "/",         name: "Home",        element: <Home />,       isMenu: true,     isPrivate: false  },
      { path:     "/about",    name: "About",       element: <About />,      isMenu: true,     isPrivate: false  },
      { path:     "/login",    name: "Login",       element: <Login />,      isMenu: false,    isPrivate: false  },
-     { path:     "/todo",  name: "Todo",     element: <Todo />,    isMenu: true,     isPrivate: true  },
-     { path:     "/account",  name: "Account",     element: <Account />,    isMenu: true,     isPrivate: true  },
      { path:     "/contact",  name: "Contact",     element: <Contact />,    isMenu: true,     isPrivate: false  },
-     { path:     "/signup",  name: "SignUp",     element: <SignUp />,    isMenu: false,     isPrivate: false  },
+     { path:     "/signup",   name: "SignUp",      element: <SignUp />,     isMenu: false,    isPrivate: false  },
+     { path:     "/todo",     name: "Todo",        element: <Todo />,       isMenu: true,     isPrivate: true,  },
+     { path:     "/account",  name: "Account",     element: <Account />,    isMenu: true,     isPrivate: true,  },
 ]
