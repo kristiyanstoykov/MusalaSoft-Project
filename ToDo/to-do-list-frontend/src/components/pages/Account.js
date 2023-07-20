@@ -63,10 +63,8 @@ export const Account = () => {
         </div>
         
       )}
-          <footer className='footer'>
-                 Make by TU Team 2
-          </footer>
       {error && <p>Error: {error}</p>}
     </div>
+
   );
 };

@@ -1,0 +1,24 @@
+.userCard{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+
+    min-height: 100vh;
+    margin: 0;
+}
+h2 {
+    margin: 10px 0;
+}
+
+h3 {
+    margin: 5px 0;
+    text-transform: uppercase;
+}
+.footer {
+    padding: 50px;
+    text-align: center;
+    background-color: #474e5d;
+    color: rgb(0, 0, 0);
+    font-size: 30px;
+  }
