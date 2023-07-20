@@ -1,4 +1,4 @@
-package com.example.todolistbackend;
+package com.example.todolistbackend.service;
 
 import org.mockito.Mock;
 import org.mockito.MockingDetails;
@@ -22,27 +22,27 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.jupiter.api.Test;
 
 @WebMvcTest(UserController.class)
-public class UserControlerTest {
+public class UserControllerTest {
 
-    @Autowired
-    private MockMvc mockMvc;
+        @Autowired
+        private MockMvc mockMvc;
 
-    @Autowired
-    private JwtTokenService tokenService;
+        @Autowired
+        private JwtTokenService tokenService;
 
-    @MockBean
-    private UserService userService;
+        @MockBean
+        private UserService userService;
 
-    @Test
-    public void getUserTest() throws Exception {
-        Mockito.when(userService.getUser(Mockito.anyString()))
-                .thenReturn(new UserDtoResponse());
-        mockMvc.perform(
-                get("/users/pe6o")
-                        .header("authentication", "Bearer " + tokenService.generateToken(null))
-                        .contentType(APPLICATION_JSON_VALUE))
-                .andExpect(status().isUnauthorized());
+        @Test
+        public void getUserTest() throws Exception {
+                Mockito.when(userService.getUser(Mockito.anyString()))
+                                .thenReturn(new UserDtoResponse());
+                mockMvc.perform(
+                                get("/users/pe6o")
+                                                .header("authentication", "Bearer " + tokenService.generateToken(null))
+                                                .contentType(APPLICATION_JSON_VALUE))
+                                .andExpect(status().isUnauthorized());
 
-        // Mockito.verify(userService, Mockito.only()).getUser(Mockito.anyString());
-    }
+                // Mockito.verify(userService, Mockito.only()).getUser(Mockito.anyString());
+        }
 }
