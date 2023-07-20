@@ -18,7 +18,7 @@ const Footer = () => {
 
 
             <div className="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4 d-flex flex-column align-items-center">
-              <h6 className="text-uppercase fw-bold">Useful links</h6>
+              <h6 className="text-uppercase fw-bold">Menu</h6>
               <hr className="mb-4 mt-0 d-inline-block mx-auto" style={{width: '60px', backgroundColor: '#7c4dff', height: '2px'}}/>
               <p>
                 <a href="/" className="text-white">Home</a>
