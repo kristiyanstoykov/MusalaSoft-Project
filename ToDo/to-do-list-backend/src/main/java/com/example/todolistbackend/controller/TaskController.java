@@ -28,11 +28,6 @@ public class TaskController {
         return taskService.getAllTasks(username);
     }
 
-    @GetMapping(path = "/{id}")
-    public TaskDtoResponse getTask(@PathVariable("id") Long id) {
-        return taskService.getTask(id);
-    }
-
     @PostMapping(path = "/add/{username}")
     public TaskDtoResponse registerTask(@Valid @RequestBody TaskDto taskDto,
                                         @PathVariable("username") String username) {
