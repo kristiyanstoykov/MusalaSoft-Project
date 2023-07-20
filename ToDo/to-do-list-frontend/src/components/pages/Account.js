@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { AuthData } from "../../auth/AuthWrapper";
+import './Account.css';
 
 export const Account = () => {
   const { user } = AuthData();
@@ -43,29 +44,28 @@ export const Account = () => {
 
   return (
     <div className="page">
-      <h2>Your Account</h2>
+      
       {userData && (
-        <div>
-          <p>First Name: {userData.firstName}</p>
-          <p>Last Name: {userData.lastName}</p>
-          <p></p>
-          <p>Username: {userData.username}</p>
-          <p>Todo:</p>
-          <ul>
-            {userData.tasks.map((task, index) => (
-              <li key={index}>
-                <p>Description: {task.description}</p>
-                <p>Date and Time of Creation: {task.dateAndTimeOfCreation}</p>
-                <p>Date of last update: {task.dateOfExpiration}</p>
-                <p>Date of last update: {task.dateOfLastUpdate}</p>
+        <div className="userCard">
+          <h1>Your Account</h1>
+           
+          <h2>First Name: </h2>
+          <h3>{userData.firstName}</h3>
 
-                <p>Finished: {task.finished ? "Yes" : "No"}</p>
+          <h2>Last Name: </h2>
+          <h3>{userData.lastName}</h3>
 
-              </li>
-            ))}
-          </ul>
+          <h2>Username: </h2>
+          <h3>{userData.username}</h3>
+
+          <h2>E-mail: </h2>
+          <h3>{userData.email}</h3>
         </div>
+        
       )}
+          <footer className='footer'>
+                 Make by TU Team 2
+          </footer>
       {error && <p>Error: {error}</p>}
     </div>
   );
