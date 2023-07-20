@@ -55,7 +55,7 @@ export const RenderMenu = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary border-bottom">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">MusalaSoft-Project</a>
         <button className={`navbar-toggler ${isOpen ? '' : 'collapsed'}`} type="button" onClick={toggle}
