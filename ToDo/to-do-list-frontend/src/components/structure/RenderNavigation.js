@@ -1,26 +1,36 @@
 import React, { useState } from 'react';
-import { Link, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Route, Routes, useNavigate, NavLink } from "react-router-dom";
 import { AuthData } from "../../auth/AuthWrapper";
 import { nav } from "./navigation";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
 
+const MenuItem = ({ r, onClick }) => (
+  <NavLink 
+    className="nav-link" 
+    to={r.path} 
+    activeClassName="active"
+    onClick={onClick}
+    exact
+  >
+    {r.name}
+  </NavLink>
+)
+
 export const RenderRoutes = () => {
   const { user } = AuthData();
 
   return (
-
      <>
-    
-    <Routes>
-      {nav.map((r, i) => {
-        if (r.isPrivate && user.isAuthenticated) {
-          return <Route key={i} path={r.path} element={r.element} />;
-        } else if (!r.isPrivate) {
-          return <Route key={i} path={r.path} element={r.element} />;
-        } else return false;
-      })}
-    </Routes>
+      <Routes>
+        {nav.map((r, i) => {
+          if (r.isPrivate && user.isAuthenticated) {
+            return <Route key={i} path={r.path} element={r.element} />;
+          } else if (!r.isPrivate) {
+            return <Route key={i} path={r.path} element={r.element} />;
+          } else return false;
+        })}
+      </Routes>
     </>
   );
   
@@ -35,10 +45,12 @@ export const RenderMenu = () => {
 
   const MenuItem = ({ r }) => {
     return (
-        <Link 
-          className="nav-link"
-          to={r.path}>{r.name}
-        </Link>
+      <NavLink
+        className="nav-link"
+        onClick={close} 
+        activeClassName="active"
+        to={r.path}>{r.name}
+      </NavLink>
     );
   };
 
@@ -62,23 +74,39 @@ export const RenderMenu = () => {
           </div>
           <div className="navbar-nav">
             {user.isAuthenticated ? (
-              <Link className="nav-link" to={"#"} onClick={() => { logout(); close(); }}>
+              <NavLink 
+                className="nav-link" 
+                to={"#"} 
+                onClick={() => 
+                  { 
+                    logout(); 
+                    close();
+                  }
+                }
+                activeClassName="active">
                 Log out
-              </Link>
+              </NavLink>
             ) : (
-              <Link className="nav-link" to={"/login"} onClick={close}>Log in</Link>
+              <NavLink 
+                className="nav-link" 
+                to={"/login"} 
+                onClick={close} 
+                activeClassName="active">
+                  Log in
+                </NavLink>
             )}
             {!user.isAuthenticated && (
-              <Link className="nav-link"
+              <NavLink className="nav-link"
                     to={"/signup"}
                     onClick={(e) => {
                       e.preventDefault();
                       navigate("/signup");
                       close();
                     }}
+                    activeClassName="active"
               >
                 Signup
-              </Link>
+              </NavLink>
             )}
           </div>
         </div>
