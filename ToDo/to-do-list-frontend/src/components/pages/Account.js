@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { AuthData } from "../../auth/AuthWrapper";
-import './Account.css';
 
 export const Account = () => {
   const { user } = AuthData();
