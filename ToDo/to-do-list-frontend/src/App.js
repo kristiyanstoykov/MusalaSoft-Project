@@ -1,6 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import './App.css';
 import { AuthWrapper } from './auth/AuthWrapper';
+import Footer from './components/structure/Footer';
 
 
 function App() {
@@ -8,7 +9,9 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <AuthWrapper />
-      </BrowserRouter>      
+      </BrowserRouter>
+      
+      <Footer />
     </div>
   );
 }
