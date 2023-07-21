@@ -12,8 +12,6 @@
 3. [Contact](#contact)
 
 
-
-
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
@@ -28,11 +26,6 @@ The To-Do Web Application is a full-stack project using React.js for the fronten
 3.	Database: The application uses a relational database for persisting data. Hibernate, an object-relational mapping (ORM) tool for the Java programming language, is used for mapping an object-oriented domain model to a relational database.
 4.	Testing: Unit tests are written with JUnit and Mockito. Integration tests are done with the help of Spring Boot Test.
 
-### Api Endpoints
-The backend provides several RESTful API endpoints:
-*	/users - endpoints for user registration and user retrieval.
-*	/tasks - endpoints for creating, retrieving, updating, and deleting tasks.
-
 ### Features
 Authentication:
  - New users can create an account by providing their details including email, username, and password.
@@ -44,13 +37,16 @@ Task Management:
  - Update Task: Users can update the details of their tasks.
  - Delete Task: Users can delete their tasks.
 
+Api Endpoints: The backend provides several RESTful API endpoints:
+*	/users - endpoints for user registration and user retrieval.
+*	/tasks - endpoints for creating, retrieving, updating, and deleting tasks.
 
 #### Built with
 [![Java][Java.com]][Java-url]
 [![Spring Boot][Spring.io]][Spring-Boot-url]
 [![MySQL][MySQL.com]][MySQL-url]
 [![React][React.js]][React-url]
-<!-- [![Bootstrap][Bootstrap.com]][Bootstrap-url] -->
+[![Bootstrap][Bootstrap.com]][Bootstrap-url]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
