@@ -84,12 +84,14 @@ Api Endpoints: The backend provides several RESTful API endpoints:
 
 1. You have to start MySQL server
 
-2. Then to start the backend navigate to the folder to-do-list-backend and run the command in the command prompt
+2. In the application.properties file you should change the my myusername and mypassword to the username and password of MySQL sever account
+
+3. Then to start the backend navigate to the folder to-do-list-backend and run the command in the command prompt
    ```sh
    mvn spring-boot:run
    ```
 
-3. Start the frontend - navigate to the folder to-do-list-frontend and run the command in the command prompt
+4. Start the frontend - navigate to the folder to-do-list-frontend and run the command in the command prompt
    ```sh
    npm start
    ```
