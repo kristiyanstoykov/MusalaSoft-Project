@@ -39,6 +39,18 @@ public class TaskController {
         return taskService.updateTask(id, taskDto);
     }
 
+    @PutMapping(path = "/{id}/finish")
+    public TaskDtoResponse finishTask(@PathVariable("id") Long id,
+                                      @Valid @RequestBody TaskDto taskDto) {
+        return taskService.finishTask(id, taskDto);
+    }
+
+    @PutMapping(path = "/{id}/unfinish")
+    public TaskDtoResponse unFinishTask(@PathVariable("id") Long id,
+                                      @Valid @RequestBody TaskDto taskDto) {
+        return taskService.unFinishTask(id, taskDto);
+    }
+
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable("id") Long id) {
         taskService.deleteTask(id);

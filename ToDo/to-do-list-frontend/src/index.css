@@ -12,6 +12,7 @@ code {
     monospace;
 }
 
-.navbar-nav a:nth-last-child(2) {
-  margin-left: auto;
-}
+@media (min-width: 992px) {
+  .navbar-nav a:nth-last-child(2) {
+    margin-left: auto;
+  }
