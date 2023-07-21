@@ -21,6 +21,9 @@ import lombok.Setter;
 @EqualsAndHashCode
 public class TaskDtoResponse {
     @NotBlank
+    private Long taskId;
+
+    @NotBlank
     private String title;
 
     @NotBlank

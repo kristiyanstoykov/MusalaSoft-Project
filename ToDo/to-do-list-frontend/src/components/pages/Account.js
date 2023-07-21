@@ -1,6 +1,5 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AuthData } from "../../auth/AuthWrapper";
-import './Account.css';
 
 export const Account = () => {
   const { user } = AuthData();
@@ -22,7 +21,7 @@ export const Account = () => {
       try {
         const response = await fetch(url, {
           headers: {
-            Authorization: `Bearer ${token}`, // Send the token in the Authorization header
+            Authorization: `Bearer ${token}`, 
           },
         });
 
@@ -30,7 +29,7 @@ export const Account = () => {
           throw new Error("Failed to fetch user data");
         }
 
-     
+
 
         const userData = await response.json();
         setUserData(userData);
@@ -44,29 +43,49 @@ export const Account = () => {
 
   return (
     <div className="page">
-      
+
       {userData && (
-        <div className="userCard">
-          <h1>Your Account</h1>
-           
-          <h2>First Name: </h2>
-          <h3>{userData.firstName}</h3>
-
-          <h2>Last Name: </h2>
-          <h3>{userData.lastName}</h3>
-
-          <h2>Username: </h2>
-          <h3>{userData.username}</h3>
-
-          <h2>E-mail: </h2>
-          <h3>{userData.email}</h3>
+        <div className="container">
+        <div className="row">
+          <div className="col-lg-5 m-auto">
+            <div className="card mt-5">
+              <div className="card-header text-center">
+                <h4>Account information</h4>
+              </div>
+              <div className="card-body">
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label fw-bold">First Name</label>
+                  <div className="col-sm-9">
+                    <input type="text" readOnly className="form-control-plaintext" value={userData.firstName} />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label fw-bold">Last Name</label>
+                  <div className="col-sm-9">
+                    <input type="text" readOnly className="form-control-plaintext" value={userData.lastName} />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label fw-bold">Username</label>
+                  <div className="col-sm-9">
+                    <input type="text" readOnly className="form-control-plaintext" value={userData.username} />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label fw-bold">Email</label>
+                  <div className="col-sm-9">
+                    <input type="text" readOnly className="form-control-plaintext" value={userData.email} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
         
       )}
-          <footer className='footer'>
-                 Make by TU Team 2
-          </footer>
       {error && <p>Error: {error}</p>}
     </div>
+
   );
 };

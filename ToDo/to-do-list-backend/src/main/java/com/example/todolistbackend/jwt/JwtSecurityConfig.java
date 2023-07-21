@@ -5,6 +5,7 @@ import java.security.KeyPair;
 import java.security.KeyPairGenerator;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
+import java.util.Arrays;
 import java.util.UUID;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
@@ -30,6 +31,9 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.servlet.handler.HandlerMappingIntrospector;
 
 import com.nimbusds.jose.JOSEException;
@@ -43,13 +47,16 @@ import com.nimbusds.jose.proc.SecurityContext;
 @EnableMethodSecurity
 public class JwtSecurityConfig {
 
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity, HandlerMappingIntrospector introspector) throws Exception {
+        CorsConfigurationSource corsConfigurationSource = corsConfigurationSource();
 
         // h2-console is a servlet
         // https://github.com/spring-projects/spring-security/issues/12310
         return httpSecurity
-                .cors()
+                .cors().configurationSource(corsConfigurationSource)
                 .and()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/authenticate","/users/register").permitAll()
@@ -71,23 +78,26 @@ public class JwtSecurityConfig {
     }
 
     @Bean
+    private static CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "DELETE", "UPDATE"));
+        configuration.setAllowCredentials(true);
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+
+    @Bean
     public AuthenticationManager authenticationManager(
             UserDetailsService userDetailsService) {
         var authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService);
         return new ProviderManager(authenticationProvider);
     }
-
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.withUsername("in28minutes")
-//                .password("{noop}dummy")
-//                .authorities("read")
-//                .roles("USER")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user);
-//    }
 
     @Bean
     public JWKSource<SecurityContext> jwkSource() {
