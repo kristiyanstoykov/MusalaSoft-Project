@@ -19,6 +19,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class TaskDtoResponse {
     @NotBlank
+    private Long taskId;
+
+    @NotBlank
     private String title;
 
     @NotBlank
