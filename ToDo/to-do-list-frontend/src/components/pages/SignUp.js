@@ -19,20 +19,16 @@ export const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   
-    // Convert the date format to "DD-MM-YYYY"
     const formattedDate = new Date(user.dateOfBirth);
     const day = String(formattedDate.getDate()).padStart(2, '0');
     const month = String(formattedDate.getMonth() + 1).padStart(2, '0');
     const year = formattedDate.getFullYear();
     const formattedDOB = `${day}-${month}-${year}`;
   
-    // Update the user object with the formatted date
     const updatedUser = { ...user, dateOfBirth: formattedDOB };
   
-    // Console.log the updated user object
     console.log('User:', updatedUser);
   
-    // Send the POST request
     axios
       .post('http://localhost:8080/users/register', updatedUser)
       .then((response) => {
@@ -41,7 +37,6 @@ export const SignUp = () => {
       })
       .catch((error) => {
         console.error('Error registering user:', error);
-        // Add your desired error handling logic
       });
   };
   
