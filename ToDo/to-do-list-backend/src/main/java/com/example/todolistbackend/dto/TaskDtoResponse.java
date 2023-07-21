@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,13 +18,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class TaskDtoResponse {
     @NotBlank
     private String title;
 
     @NotBlank
     private String description;
-    
+
     @NotBlank
     @JsonFormat(pattern = "HH:mm dd-MM-yyyy")
     private LocalDateTime timeOfCreation;
