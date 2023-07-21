@@ -46,7 +46,7 @@ export const Login = () => {
         <Button onClick={doLogin} variant="success" className="w-100">
           Log in
         </Button>
-        {errorMessage && <Alert variant='danger' className="mt-3">{errorMessage}</Alert>}
+        {errorMessage && <Alert variant='danger' className="mt-3">{errorMessage.message}</Alert>}
       </Form>
     </Container>
   );
