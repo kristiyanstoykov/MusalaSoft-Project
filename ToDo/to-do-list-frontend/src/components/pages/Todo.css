@@ -1,32 +1,72 @@
+/* Todo.css */
+
 .page {
-    margin: 20px;
-  }
-  
-  .heading {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .todo-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .todo-table th,
-  .todo-table td {
-    padding: 10px;
-    border: 1px solid #ccc;
-  }
-  
-  .todo-table th {
-    background-color: #f8f8f8;
-    font-weight: bold;
-    text-align: left;
-  }
-  
-  .error {
-    color: red;
-    font-weight: bold;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.heading {
+  text-align: center;
+}
+
+.add-task-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-task-popup h3 {
+  margin-top: 0;
+}
+
+.add-task-popup input {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.add-task-popup button {
+  margin-right: 10px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
+
+.todo-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.todo-table th,
+.todo-table td {
+  padding: 10px;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+.todo-table th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.todo-table td {
+  vertical-align: middle;
+}
+
+.error {
+  color: red;
+}

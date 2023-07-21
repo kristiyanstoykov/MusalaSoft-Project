@@ -21,7 +21,7 @@ export const Account = () => {
       try {
         const response = await fetch(url, {
           headers: {
-            Authorization: `Bearer ${token}`, // Send the token in the Authorization header
+            Authorization: `Bearer ${token}`, 
           },
         });
 
