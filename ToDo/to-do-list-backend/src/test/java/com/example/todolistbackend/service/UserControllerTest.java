@@ -37,12 +37,11 @@ public class UserControllerTest {
         public void getUserTest() throws Exception {
                 Mockito.when(userService.getUser(Mockito.anyString()))
                                 .thenReturn(new UserDtoResponse());
-                mockMvc.perform(
-                                get("/users/pe6o")
-                                                .header("authentication", "Bearer " + tokenService.generateToken(null))
-                                                .contentType(APPLICATION_JSON_VALUE))
+                mockMvc.perform(get("/users/pe6o")
+                                .header("authentication", "Bearer " + tokenService.generateToken(null))
+                                .contentType(APPLICATION_JSON_VALUE))
                                 .andExpect(status().isUnauthorized());
 
-                // Mockito.verify(userService, Mockito.only()).getUser(Mockito.anyString());
+                Mockito.verify(userService, Mockito.only()).getUser(Mockito.anyString());
         }
 }
