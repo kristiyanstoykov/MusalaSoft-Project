@@ -110,7 +110,7 @@ Stanislav - stanislav2177@gmail.com
 
 Stoyan - stoianstoikov@gmail.com
 
-Zaro Nikiforov - znikiforov33@gmail.com
+Zahari - znikiforov33@gmail.com
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
