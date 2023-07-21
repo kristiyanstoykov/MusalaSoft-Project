@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
+import { Button, Container, Form } from 'react-bootstrap';
 
 
 export const SignUp = () => {
@@ -45,115 +46,76 @@ export const SignUp = () => {
   };
 
   return (
-    <div>
-      <div style={styles.container}>
-        <div style={styles.form}>
-          <h2 style={styles.heading}>Sign Up</h2>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label>First Name:</label>
-              <input
-                type="text"
-                name="firstName"
-                style={styles.input}
-                value={user.firstName}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>Last Name:</label>
-              <input
-                type="text"
-                name="lastName"
-                style={styles.input}
-                value={user.lastName}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label>Username:</label>
-              <input
-                type="text"
-                name="username"
-                style={styles.input}
-                value={user.username}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label>Date of Birth:</label>
-              <input
-                type="date"
-                name="dateOfBirth"
-                style={styles.input}
-                value={user.dateOfBirth}
-                onChange={handleChange}
-              />
-            </div>
-
-            <div>
-              <label>E-Mail:</label>
-              <input
-                type="email"
-                name="email"
-                style={styles.input}
-                value={user.email}
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <label>Password</label>
-              <input
-                type="password"
-                name="password"
-                style={styles.input}
-                value={user.password}
-                onChange={handleChange}
-              />
-            </div>
-            <button type="submit" style={styles.button}>
-              Sign Up
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+    <Container className="d-flex justify-content-center align-items-center vh-100">
+      <Form className="p-4 border rounded bg-white" onSubmit={handleSubmit}>
+        <h2 className="text-center mb-3">Sign Up</h2>
+        
+        <Form.Group className="mb-3">
+          <Form.Label>First Name:</Form.Label>
+          <Form.Control 
+            type="text"
+            name="firstName"
+            value={user.firstName}
+            onChange={handleChange}
+          />
+        </Form.Group>
+        
+        <Form.Group className="mb-3">
+          <Form.Label>Last Name:</Form.Label>
+          <Form.Control 
+            type="text"
+            name="lastName"
+            value={user.lastName}
+            onChange={handleChange}
+          />
+        </Form.Group>
+  
+        <Form.Group className="mb-3">
+          <Form.Label>Username:</Form.Label>
+          <Form.Control 
+            type="text"
+            name="username"
+            value={user.username}
+            onChange={handleChange}
+          />
+        </Form.Group>
+  
+        <Form.Group className="mb-3">
+          <Form.Label>Date of Birth:</Form.Label>
+          <Form.Control 
+            type="date"
+            name="dateOfBirth"
+            value={user.dateOfBirth}
+            onChange={handleChange}
+          />
+        </Form.Group>
+  
+        <Form.Group className="mb-3">
+          <Form.Label>E-Mail:</Form.Label>
+          <Form.Control 
+            type="email"
+            name="email"
+            value={user.email}
+            onChange={handleChange}
+          />
+        </Form.Group>
+  
+        <Form.Group className="mb-3">
+          <Form.Label>Password:</Form.Label>
+          <Form.Control 
+            type="password"
+            name="password"
+            value={user.password}
+            onChange={handleChange}
+          />
+        </Form.Group>
+  
+        <Button type="submit" variant="success" className="w-100">
+          Sign Up
+        </Button>
+      </Form>
+    </Container>
   );
 }
-
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-  },
-  form: {
-    padding: '20px',
-    border: '1px solid #ccc',
-    borderRadius: '4px',
-    backgroundColor: '#fff',
-  },
-  heading: {
-    textAlign: 'center', 
-  },
-  input: {
-    width: '100%',
-    padding: '10px',
-    marginBottom: '10px',
-    borderRadius: '4px',
-    border: '1px solid #ccc',
-  },
-  button: {
-    backgroundColor: '#4CAF50',
-    color: '#fff',
-    padding: '10px 20px',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  },
-};
 
 export default SignUp;

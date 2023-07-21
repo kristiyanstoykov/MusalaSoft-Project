@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AuthData } from "../../auth/AuthWrapper";
 
 export const Account = () => {
@@ -29,7 +29,7 @@ export const Account = () => {
           throw new Error("Failed to fetch user data");
         }
 
-     
+
 
         const userData = await response.json();
         setUserData(userData);
@@ -43,30 +43,49 @@ export const Account = () => {
 
   return (
     <div className="page">
-      <h2>Your Account</h2>
+
       {userData && (
-        <div>
-          <p>First Name: {userData.firstName}</p>
-          <p>Last Name: {userData.lastName}</p>
-          <p></p>
-          <p>Username: {userData.username}</p>
-          <p>Todo:</p>
-          <ul>
-            {userData.tasks.map((task, index) => (
-              <li key={index}>
-                <p>Description: {task.description}</p>
-                <p>Date and Time of Creation: {task.dateAndTimeOfCreation}</p>
-                <p>Date of last update: {task.dateOfExpiration}</p>
-                <p>Date of last update: {task.dateOfLastUpdate}</p>
-
-                <p>Finished: {task.finished ? "Yes" : "No"}</p>
-
-              </li>
-            ))}
-          </ul>
+        <div className="container">
+        <div className="row">
+          <div className="col-lg-5 m-auto">
+            <div className="card mt-5">
+              <div className="card-header text-center">
+                <h4>Account information</h4>
+              </div>
+              <div className="card-body">
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label fw-bold">First Name</label>
+                  <div className="col-sm-9">
+                    <input type="text" readOnly className="form-control-plaintext" value={userData.firstName} />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label fw-bold">Last Name</label>
+                  <div className="col-sm-9">
+                    <input type="text" readOnly className="form-control-plaintext" value={userData.lastName} />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label fw-bold">Username</label>
+                  <div className="col-sm-9">
+                    <input type="text" readOnly className="form-control-plaintext" value={userData.username} />
+                  </div>
+                </div>
+                <div className="form-group row">
+                  <label className="col-sm-3 col-form-label fw-bold">Email</label>
+                  <div className="col-sm-9">
+                    <input type="text" readOnly className="form-control-plaintext" value={userData.email} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+        
       )}
       {error && <p>Error: {error}</p>}
     </div>
+
   );
 };

@@ -3,6 +3,7 @@ package com.example.todolistbackend.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,6 +15,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 public class UserDtoResponse {
     @NotEmpty
     private String firstName;
@@ -28,6 +30,5 @@ public class UserDtoResponse {
     @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDate dateOfBirth;
     private List<TaskDtoResponse> tasks;
-
 
 }
