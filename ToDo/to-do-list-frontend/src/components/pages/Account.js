@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AuthData } from "../../auth/AuthWrapper";
 
 export const Account = () => {
@@ -29,7 +29,7 @@ export const Account = () => {
           throw new Error("Failed to fetch user data");
         }
 
-     
+
 
         const userData = await response.json();
         setUserData(userData);
@@ -43,7 +43,7 @@ export const Account = () => {
 
   return (
     <div className="page">
-      
+
       {userData && (
         <div className="container">
         <div className="row">
