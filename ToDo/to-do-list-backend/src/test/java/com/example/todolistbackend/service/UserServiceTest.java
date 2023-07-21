@@ -3,6 +3,10 @@ package com.example.todolistbackend.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Optional;
@@ -18,8 +22,11 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.example.todolistbackend.dto.UserDto;
 import com.example.todolistbackend.dto.UserDtoResponse;
 import com.example.todolistbackend.exception.UserDoesNotExistException;
+import com.example.todolistbackend.exception.UserWithGivenEmailAlreadyExistsException;
+import com.example.todolistbackend.exception.UserWithGivenUsernameAlreadyExistsException;
 import com.example.todolistbackend.model.User;
 import com.example.todolistbackend.repository.UserRepository;
 import com.example.todolistbackend.service.UserService;
@@ -37,15 +44,15 @@ public class UserServiceTest {
         private final User testUser = new User(5L, "stoyan", "stoyan",
                         "stoyan@test.test", "sto", "123456", null, null);
 
-        private final User testUserUpdated = new User(5L, "update", "update",
-                        "update@test.test", "upd", "654321", null, null);
-
         private final UserDtoResponse testResponse = new UserDtoResponse("stoyan", "stoyan", "sto", "stoyan@test.test",
                         "123456", null, null);
 
+        private final User testUserUpdated = new User(5L, "update", "update",
+                        "update@test.test", "upd", "654321", null, null);
         private final UserDtoResponse testResponseUpdate = new UserDtoResponse("update", "update", "upd",
-                        "update@test.test",
-                        "654321", null, null);
+                        "update@test.test", "654321", null, null);
+        private final UserDto userDtoUpdate = new UserDto("update", "update", "upd",
+                        "update@test.test", "654321", null, null);
 
         private final ArgumentCaptor<String> stringCapture = ArgumentCaptor.forClass(String.class);
 
@@ -90,21 +97,75 @@ public class UserServiceTest {
 
         @Test
         public void updateUserTest() {
-                when(userRepository.findByUsername("sto"))
-                        .thenReturn(Optional.of(testUser));
-                when(userRepository.findByUsername("upd"))
-                        .thenReturn(Optional.of(testUserUpdated));
-                when(userRepository.findByEmail("update@test.test"))
-                        .thenReturn(Optional.empty());
-                when(userRepository.save(any(User.class)))
-                        .thenReturn(testUserUpdated);
 
-                when(modelMapper.map(testResponseUpdate, User.class))
-                .thenReturn(testUserUpdated);
-                // when(modelMapper.map(testUserUpdated, UserDtoResponse.class))
-                //         .thenReturn(new UserDtoResponse(testUserUpdated.getUsername(), 
-                //         testUserUpdated.getEmail()));
-                // TODO: Finish updateUserTest
+                when(userRepository.findByUsername("sto"))
+                                .thenReturn(Optional.of(testUser));
+                when(userRepository.findByUsername("upd"))
+                                .thenReturn(Optional.empty());
+                when(userRepository.findByEmail("update@test.test"))
+                                .thenReturn(Optional.empty());
+                when(userRepository.save(any(User.class)))
+                                .thenReturn(testUserUpdated);
+                when(modelMapper.map(any(UserDto.class), eq(User.class)))
+                                .thenReturn(testUserUpdated);
+                when(modelMapper.map(any(User.class), eq(UserDtoResponse.class)))
+                                .thenReturn(testResponseUpdate);
+
+                // Call updateUser
+                UserDtoResponse updatedUserDtoResponse = userService.updateUser("sto", userDtoUpdate);
+
+                // Verify the result
+                assertEquals(testResponseUpdate, updatedUserDtoResponse);
+
+                // Verify the interactions with the mocks
+                verify(userRepository, times(2)).findByUsername(anyString());
+                verify(userRepository, times(1)).findByEmail(anyString());
+                verify(userRepository, times(1)).save(any(User.class));
+        }
+
+        @Test
+        public void updateUser_UserDoesNotExistException() throws Exception {
+                UserDto userDtoUpdate = new UserDto("update", "update", "upd",
+                                "update@test.test", "654321", null, null);
+
+                when(userRepository.findByUsername("sto"))
+                                .thenReturn(Optional.empty());
+
+                assertThrows(UserDoesNotExistException.class, () -> {
+                        userService.updateUser("sto", userDtoUpdate);
+                });
+        }
+
+        @Test
+        public void updateUser_UserWithGivenUsernameAlreadyExistsException() throws Exception {
+                UserDto userDtoUpdate = new UserDto("update", "update", "upd",
+                                "update@test.test", "654321", null, null);
+
+                when(userRepository.findByUsername("sto"))
+                                .thenReturn(Optional.of(testUser));
+                when(userRepository.findByUsername("upd"))
+                                .thenReturn(Optional.of(testUserUpdated));
+
+                assertThrows(UserWithGivenUsernameAlreadyExistsException.class, () -> {
+                        userService.updateUser("sto", userDtoUpdate);
+                });
+        }
+
+        @Test
+        public void updateUser_UserWithGivenEmailAlreadyExistsException() throws Exception {
+                UserDto userDtoUpdate = new UserDto("update", "update", "upd",
+                                "update@test.test", "654321", null, null);
+
+                when(userRepository.findByUsername("sto"))
+                                .thenReturn(Optional.of(testUser));
+                when(userRepository.findByUsername("upd"))
+                                .thenReturn(Optional.empty());
+                when(userRepository.findByEmail("update@test.test"))
+                                .thenReturn(Optional.of(testUserUpdated));
+
+                assertThrows(UserWithGivenEmailAlreadyExistsException.class, () -> {
+                        userService.updateUser("sto", userDtoUpdate);
+                });
         }
 
 }
