@@ -19,8 +19,19 @@ public class JwtTokenService {
     }
 
     public String generateToken(Authentication authentication) {
-        String scope = (String)authentication.getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.joining(" "));
-        JwtClaimsSet claims = JwtClaimsSet.builder().issuer("self").issuedAt(Instant.now()).expiresAt(Instant.now().plus(90L, ChronoUnit.MINUTES)).subject(authentication.getName()).claim("scope", scope).build();
+        String scope = (String)authentication
+                .getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.joining(" "));
+
+        JwtClaimsSet claims = JwtClaimsSet
+                .builder().issuer("self")
+                .issuedAt(Instant.now())
+                .expiresAt(Instant.now()
+                        .plus(90L, ChronoUnit.MINUTES))
+                .subject(authentication.getName())
+                .claim("scope", scope)
+                .build();
         return this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
 }

@@ -8,7 +8,6 @@ export const AuthWrapper = () => {
      const [user, setUser] = useState({ name: "", isAuthenticated: false });
    
 const login = (userName, password) => {
-  // Make a call to the authentication API to get the JWT token
   return fetch("http://localhost:8080/authenticate", {
     method: "POST",
     headers: {

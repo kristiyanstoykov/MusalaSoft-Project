@@ -1,17 +1,20 @@
+import React from 'react';
+import News from "./News";
+
 export const Home = () => {
 
-     return(
-          <div>
-          <div className="App">
-              <header className="App-header">
-                  <div className="App-intro">
-                      <h2>Task List</h2>
-          
-          </div>
-          
-        </header>
-      </div>
-          </div>
-  
-      )
+    return (
+        <div>
+            <div className="App">
+                <header className="App-header">
+                    <div className="App">
+
+                        <News />
+                    </div>
+
+                </header>
+            </div>
+        </div>
+
+    )
 }
