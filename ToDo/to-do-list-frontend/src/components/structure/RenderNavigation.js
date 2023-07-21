@@ -55,7 +55,7 @@ export const RenderMenu = () => {
   };
 
   return (
-    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary border-bottom">
       <div className="container-fluid">
         <a className="navbar-brand" href="/">MusalaSoft-Project</a>
         <button className={`navbar-toggler ${isOpen ? '' : 'collapsed'}`} type="button" onClick={toggle}
@@ -63,7 +63,7 @@ export const RenderMenu = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className={`collapse navbar-collapse ${isOpen ? 'show' : ''}`}>
-          <div className="navbar-nav me-auto mb-2 mb-lg-0">
+          <div className="navbar-nav d-flex flex-grow-1 mb-2 mb-lg-0">
             {nav.map((r, i) => {
               if (!r.isPrivate && r.isMenu) {
                 return <MenuItem key={i} r={r} onClick={close} />;
@@ -71,8 +71,6 @@ export const RenderMenu = () => {
                 return <MenuItem key={i} r={r} onClick={close} />;
               } else return false;
             })}
-          </div>
-          <div className="navbar-nav">
             {user.isAuthenticated ? (
               <NavLink 
                 className="nav-link" 
@@ -88,7 +86,7 @@ export const RenderMenu = () => {
               </NavLink>
             ) : (
               <NavLink 
-                className="nav-link" 
+                className="nav-link"
                 to={"/login"} 
                 onClick={close} 
                 activeClassName="active">

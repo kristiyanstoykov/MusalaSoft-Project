@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthData } from "../../auth/AuthWrapper";
+import { Button, Container, Form, Alert } from 'react-bootstrap';
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -22,76 +23,31 @@ export const Login = () => {
     }
   };
 
-  const styles = {
-    container: {
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      height: '100vh',
-    },
-    form: {
-      padding: '20px',
-      border: '1px solid #ccc',
-      borderRadius: '4px',
-      backgroundColor: '#fff',
-    },
-    heading: {
-      textAlign: 'center',
-    },
-    input: {
-      width: '100%',
-      padding: '10px',
-      marginBottom: '10px',
-      borderRadius: '4px',
-      border: '1px solid #ccc',
-    },
-    button: {
-     backgroundColor: "#4CAF50",
-     color: "#fff",
-     padding: "10px 20px",
-     border: "none", 
-     borderRadius: "4px",
-     cursor: "pointer",
-     outline: "none",
-    },
-    error: {
-      color: 'red',
-    },
-  };
-
   return (
-    <div style={styles.container}>
-      <div style={styles.form}>
-        <h2 style={styles.heading}>Login page</h2>
-        <div className="inputs">
-          <div className="input">
-            <input
-              value={formData.userName}
-              onChange={(e) => setFormData({ userName: e.target.value })}
-              type="text"
-              style={styles.input}
-            />
-          </div>
-          <div className="input">
-            <input
-              value={formData.password}
-              onChange={(e) => setFormData({ password: e.target.value })}
-              type="password"
-              style={styles.input}
-            />
-          </div>
-          <div className="button">
-            <button onClick={doLogin} style={styles.button}>
-              Log in
-            </button>
-          </div>
-          {errorMessage ? (
-            <div className="error" style={styles.error}>
-              {errorMessage}
-            </div>
-          ) : null}
-        </div>
-      </div>
-    </div>
+    <Container className="d-flex justify-content-center align-items-center vh-100">
+      <Form className="p-3 border rounded bg-white">
+        <h2 className="text-center mb-3">Login page</h2>
+        <Form.Group className="mb-3">
+          <Form.Control 
+            value={formData.userName} 
+            onChange={(e) => setFormData({ userName: e.target.value })} 
+            type="text"
+            placeholder="Username"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Control 
+            value={formData.password} 
+            onChange={(e) => setFormData({ password: e.target.value })} 
+            type="password"
+            placeholder="Password"
+          />
+        </Form.Group>
+        <Button onClick={doLogin} variant="success" className="w-100">
+          Log in
+        </Button>
+        {errorMessage && <Alert variant='danger' className="mt-3">{errorMessage}</Alert>}
+      </Form>
+    </Container>
   );
 };
