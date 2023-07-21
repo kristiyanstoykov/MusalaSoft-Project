@@ -2,9 +2,11 @@ package com.example.todolistbackend.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -98,17 +100,17 @@ public class UserServiceTest {
         @Test
         public void updateUserTest() {
 
-                when(userRepository.findByUsername("sto"))
+                Mockito.when(userRepository.findByUsername("sto"))
                                 .thenReturn(Optional.of(testUser));
-                when(userRepository.findByUsername("upd"))
+                Mockito.when(userRepository.findByUsername("upd"))
                                 .thenReturn(Optional.empty());
-                when(userRepository.findByEmail("update@test.test"))
+                Mockito.when(userRepository.findByEmail("update@test.test"))
                                 .thenReturn(Optional.empty());
-                when(userRepository.save(any(User.class)))
+                Mockito.when(userRepository.save(any(User.class)))
                                 .thenReturn(testUserUpdated);
-                when(modelMapper.map(any(UserDto.class), eq(User.class)))
+                Mockito.when(modelMapper.map(any(UserDto.class), eq(User.class)))
                                 .thenReturn(testUserUpdated);
-                when(modelMapper.map(any(User.class), eq(UserDtoResponse.class)))
+                Mockito.when(modelMapper.map(any(User.class), eq(UserDtoResponse.class)))
                                 .thenReturn(testResponseUpdate);
 
                 // Call updateUser
@@ -118,9 +120,10 @@ public class UserServiceTest {
                 assertEquals(testResponseUpdate, updatedUserDtoResponse);
 
                 // Verify the interactions with the mocks
-                verify(userRepository, times(2)).findByUsername(anyString());
-                verify(userRepository, times(1)).findByEmail(anyString());
-                verify(userRepository, times(1)).save(any(User.class));
+                Mockito.verify(userRepository, times(2)).findByUsername(anyString());
+                Mockito.verify(userRepository, times(1)).findByEmail(anyString());
+                Mockito.verify(userRepository, times(1)).save(any(User.class));
+
         }
 
         @Test
@@ -128,7 +131,7 @@ public class UserServiceTest {
                 UserDto userDtoUpdate = new UserDto("update", "update", "upd",
                                 "update@test.test", "654321", null, null);
 
-                when(userRepository.findByUsername("sto"))
+                Mockito.when(userRepository.findByUsername("sto"))
                                 .thenReturn(Optional.empty());
 
                 assertThrows(UserDoesNotExistException.class, () -> {
@@ -141,9 +144,9 @@ public class UserServiceTest {
                 UserDto userDtoUpdate = new UserDto("update", "update", "upd",
                                 "update@test.test", "654321", null, null);
 
-                when(userRepository.findByUsername("sto"))
+                Mockito.when(userRepository.findByUsername("sto"))
                                 .thenReturn(Optional.of(testUser));
-                when(userRepository.findByUsername("upd"))
+                Mockito.when(userRepository.findByUsername("upd"))
                                 .thenReturn(Optional.of(testUserUpdated));
 
                 assertThrows(UserWithGivenUsernameAlreadyExistsException.class, () -> {
@@ -156,11 +159,11 @@ public class UserServiceTest {
                 UserDto userDtoUpdate = new UserDto("update", "update", "upd",
                                 "update@test.test", "654321", null, null);
 
-                when(userRepository.findByUsername("sto"))
+                Mockito.when(userRepository.findByUsername("sto"))
                                 .thenReturn(Optional.of(testUser));
-                when(userRepository.findByUsername("upd"))
+                Mockito.when(userRepository.findByUsername("upd"))
                                 .thenReturn(Optional.empty());
-                when(userRepository.findByEmail("update@test.test"))
+                Mockito.when(userRepository.findByEmail("update@test.test"))
                                 .thenReturn(Optional.of(testUserUpdated));
 
                 assertThrows(UserWithGivenEmailAlreadyExistsException.class, () -> {
@@ -168,4 +171,82 @@ public class UserServiceTest {
                 });
         }
 
+        @Test
+        public void deleteUserTest() {
+
+                Mockito.when(userRepository.findByUsername("sto"))
+                                .thenReturn(Optional.of(testUser));
+
+                Mockito.doNothing().when(userRepository).delete(any(User.class));
+
+                userService.deleteUser("sto");
+
+                Mockito.verify(userRepository, times(1)).findByUsername("sto");
+                Mockito.verify(userRepository, times(1)).delete(any(User.class));
+        }
+
+        @Test
+        public void deleteUserTest_UserDoesNotExistException() throws Exception {
+
+                Mockito.when(userRepository.findByUsername("sto"))
+                                .thenReturn(Optional.empty());
+
+                assertThrows(UserDoesNotExistException.class, () -> {
+                        userService.deleteUser("sto");
+                });
+        }
+
+        @Test
+        public void registerUserTest() {
+
+                UserDto userDtoRegister = new UserDto("stoyan", "stoyan", "sto",
+                                "stoyan@test.test", "123456", null, null);
+
+                Mockito.when(userRepository.findByUsername("sto"))
+                                .thenReturn(Optional.empty());
+                Mockito.when(userRepository.findByEmail("stoyan@test.test"))
+                                .thenReturn(Optional.empty());
+                Mockito.when(userRepository.save(any(User.class)))
+                                .thenReturn(testUser);
+                Mockito.when(modelMapper.map(any(UserDto.class), eq(User.class)))
+                                .thenReturn(testUser);
+                Mockito.when(modelMapper.map(any(User.class), eq(UserDtoResponse.class)))
+                                .thenReturn(testResponse);
+
+                UserDtoResponse registeredUserDtoResponse = userService.registerUser(userDtoRegister);
+
+                assertEquals(testResponse, registeredUserDtoResponse);
+
+                Mockito.verify(userRepository, times(1)).findByUsername(anyString());
+                Mockito.verify(userRepository, times(1)).findByEmail(anyString());
+                Mockito.verify(userRepository, times(1)).save(any(User.class));
+        }
+
+        @Test
+        public void registerUserTest_UserWithGivenEmailAlreadyExistsException() {
+                UserDto userDtoRegister = new UserDto("register", "register", "reg",
+                                "register@test.test", "654321", null, null);
+
+                Mockito.when(userRepository.findByUsername("reg"))
+                                .thenReturn(Optional.empty());
+                Mockito.when(userRepository.findByEmail("register@test.test"))
+                                .thenReturn(Optional.of(testUser));
+
+                assertThrows(UserWithGivenEmailAlreadyExistsException.class, () -> {
+                        userService.registerUser(userDtoRegister);
+                });
+        }
+
+        @Test
+        public void registerUserTest_UserWithGivenUsernameAlreadyExistsException() throws Exception {
+                UserDto userDtoRegister = new UserDto("register", "register", "reg",
+                                "register@test.test", "654321", null, null);
+
+                Mockito.when(userRepository.findByUsername("reg"))
+                                .thenReturn(Optional.of(testUser));
+
+                assertThrows(UserWithGivenUsernameAlreadyExistsException.class, () -> {
+                        userService.registerUser(userDtoRegister);
+                });
+        }
 }
