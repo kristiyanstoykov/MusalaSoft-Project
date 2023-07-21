@@ -1,5 +1,7 @@
-# MusalaSoft-Project - ToDo web application
 <a name="readme-top"></a>
+
+# MusalaSoft-Project - ToDo web application
+
 <!-- TABLE OF CONTENTS -->
 ## Contents
 1. [About The Project](#about-the-project)
