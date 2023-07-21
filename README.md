@@ -23,15 +23,16 @@
 The To-Do Web Application is a full-stack project using React.js for the frontend and Java with Spring Boot and MySQL for the backend. It allows users to create, read, update, and delete (CRUD operations) their to-do tasks.
 
 ### Technologies used
-1.	Frontend: The frontend of the application is built with React.js, a JavaScript library for building user interfaces. It makes use of the React Router library for routing and Axios for making HTTP requests to the backend.
-2.	Backend: The backend of the application is built with Spring Boot, a Java-based framework for creating stand-alone, production-grade Spring based Applications.
-3.	Database: The application uses a relational database for persisting data. Hibernate, an object-relational mapping (ORM) tool for the Java programming language, is used for mapping an object-oriented domain model to a relational database.
-4.	Testing: Unit tests are written with JUnit and Mockito. Integration tests are done with the help of Spring Boot Test.
+ -	Frontend: The frontend of the application is built with React.js, a JavaScript library for building user interfaces. It makes use of the React Router library for routing and Axios for making HTTP requests to the backend.
+ -	Backend: The backend of the application is built with Spring Boot and for authorization Spring Security, a Java-based framework for creating stand-alone, production-grade Spring based Applications.
+ -	Database: The application uses a relational database for persisting data. Hibernate, an object-relational mapping (ORM) tool for the Java programming language, is used for mapping an object-oriented domain model to a relational database.
+ -	Testing: Unit tests are written with JUnit and Mockito. Integration tests are done with the help of Spring Boot Test.
 
 ### Features
 Authentication:
  - New users can create an account by providing their details including email, username, and password.
  - Existing users can log in using their username and password.
+ - Authentication and authorization is handled by Spring Security, which prohibits accessing secured endpoints without legal JWT token.
 
 Task Management:
  - Create Task: Users can create a new task with a title and a description.
@@ -40,8 +41,8 @@ Task Management:
  - Delete Task: Users can delete their tasks.
 
 Api Endpoints: The backend provides several RESTful API endpoints:
-*	/users - endpoints for user registration and user retrieval.
-*	/tasks - endpoints for creating, retrieving, updating, and deleting tasks.
+ -	/users - endpoints for user registration and user retrieval.
+ -	/tasks - endpoints for creating, retrieving, updating, and deleting tasks.
 
 #### Built with
 [![Java][Java.com]][Java-url]
