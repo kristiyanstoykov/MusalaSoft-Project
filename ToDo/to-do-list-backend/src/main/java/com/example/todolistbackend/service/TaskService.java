@@ -63,6 +63,28 @@ public class TaskService {
         return modelMapper.map(taskToUpdate, TaskDtoResponse.class);
     }
 
+    public TaskDtoResponse finishTask(Long id, TaskDto taskDto) {
+        Task taskToUpdate = taskRepository.findById(id)
+                .orElseThrow(() -> new TaskDoesNotExistException(TASK_DOES_NOT_EXIST));
+
+        taskToUpdate.setDateOfLastUpdate(LocalDateTime.now());
+        taskToUpdate.setIsFinished(true);
+
+        modelMapper.map(taskDto, taskToUpdate);
+        return modelMapper.map(taskToUpdate, TaskDtoResponse.class);
+    }
+
+    public TaskDtoResponse unFinishTask(Long id, TaskDto taskDto) {
+        Task taskToUpdate = taskRepository.findById(id)
+                .orElseThrow(() -> new TaskDoesNotExistException(TASK_DOES_NOT_EXIST));
+
+        taskToUpdate.setDateOfLastUpdate(LocalDateTime.now());
+        taskToUpdate.setIsFinished(false);
+
+        modelMapper.map(taskDto, taskToUpdate);
+        return modelMapper.map(taskToUpdate, TaskDtoResponse.class);
+    }
+
     public TaskDtoResponse addTask(TaskDto taskDto, String username) {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UserDoesNotExistException(USER_DOES_NOT_EXIST));
